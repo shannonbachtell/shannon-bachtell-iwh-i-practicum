@@ -34,3 +34,16 @@ Custom Object: Plants
 HubSpot Developer Test Account ID: 52301034
 
 [View Plants Custom Object in HubSpot](https://app.hubspot.com/contacts/52301034/objects/2-72763022/views/all/list)
+
+## Running the Practicum Locally
+
+1. Install dependencies using `npm install`.
+2. Create a `.env` file containing your HubSpot private app access token:
+   `HUBSPOT_ACCESS_TOKEN=your_access_token`
+3. Start the application using `node index.js`.
+4. Open the local application in your browser.
+5. Use the homepage to view Plant records and the
+   "Add to this table" link to create a new Plant.
+
+The `.env` file is excluded from Git to protect the
+HubSpot private app access token.
