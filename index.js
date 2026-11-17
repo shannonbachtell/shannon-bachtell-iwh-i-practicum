@@ -14,7 +14,7 @@ const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
-app.get('/plants', async (req, res) => {
+app.get('/', async (req, res) => {
   const url = 'https://api.hubapi.com/crm/v3/objects/2-72763022';
 
   const headers = {
@@ -26,11 +26,12 @@ app.get('/plants', async (req, res) => {
     const response = await axios.get(url, {
       headers: headers,
       params: {
-        properties: 'name,description,bio,habitat'
+        properties: 'name,description,bio,hanitat'
       }
     });
 
-res.render('plants', {
+res.render('homepage', {
+  title: 'Plants | Integrating With HubSpot I Practicum',
   plants: response.data.results
 });
 
@@ -49,13 +50,16 @@ res.render('plants', {
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
 // * Code for Route 2 goes here
-app.get('/plants/form', async (req, res) => {
+app.get('/update-cobj', async (req, res) => {
   const plantId = req.query.id;
 
   // Display a blank form for a new Plant
   if (!plantId) {
-    return res.render('plant-form', { plant: null });
-  }
+  return res.render('updates', {
+    title: 'Update Custom Object Form | Integrating With HubSpot I Practicum',
+    plant: null
+  });
+}
 
   // Retrieve an existing Plant for editing
   const url = `https://api.hubapi.com/crm/v3/objects/2-72763022/${encodeURIComponent(plantId)}`;
@@ -91,7 +95,7 @@ app.get('/plants/form', async (req, res) => {
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-app.post('/plants/save', async (req, res) => {
+app.post('/update-cobj', async (req, res) => {
   const { id, name, description, bio, habitat } = req.body;
 
   if (!name || !name.trim()) {
@@ -122,7 +126,7 @@ app.post('/plants/save', async (req, res) => {
       await axios.post(url, data, { headers });
     }
 
-    res.redirect('/plants');
+    res.redirect('/');
   } catch (error) {
     console.error(
       'Error saving Plant:',

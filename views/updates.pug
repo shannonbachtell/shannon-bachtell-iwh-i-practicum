@@ -1,0 +1,50 @@
+
+doctype html
+html(lang="en")
+  head
+    title Add or Edit Plant
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+
+  body
+  h1= title
+  p
+    a(href='/') Return to the homepage
+
+    form(action='/update-cobj' method='POST')
+      if plant
+        input(type="hidden", name="id", value=plant.id)
+
+      div
+        label(for="name") Plant Name
+        input(
+          type="text"
+          id="name"
+          name="name"
+          value=plant ? plant.properties.name : ''
+          required
+        )
+
+      div
+        label(for="description") Description
+        input(
+          type="text"
+          id="description"
+          name="description"
+          value=plant ? plant.properties.description : ''
+        )
+
+      div
+        label(for="bio") Bio
+        textarea(id="bio", name="bio")= plant ? plant.properties.bio : ''
+
+      div
+        label(for="habitat") Habitat
+        input(
+          type="text"
+          id="habitat"
+          name="habitat"
+          value=plant ? plant.properties.habitat : ''
+        )
+
+      button(type="submit") Save Plant

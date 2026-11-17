@@ -1,0 +1,26 @@
+
+doctype html
+html
+  head
+    title= title
+  body
+    h1 My HubSpot Plants
+
+    a(href='/update-cobj') Add to this table
+
+    hr
+
+    table(border='1', cellpadding='10')
+      thead
+        tr
+          th Name
+          th Description
+          th Bio
+          th Habitat
+      tbody
+        each plant in plants
+          tr
+            td= plant.properties.name || 'Not provided'
+            td= plant.properties.description || 'Not provided'
+            td= plant.properties.bio || 'Not provided'
+            td= plant.properties.hanitat || 'Not provided'
