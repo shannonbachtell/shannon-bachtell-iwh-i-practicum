@@ -1,0 +1,27 @@
+
+doctype html
+html(lang="en")
+  head
+    title My HubSpot Plants
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    h1 My HubSpot Plants
+    p Plants retrieved from HubSpot using the API.
+
+    if plants.length
+      each plant in plants
+        .card
+          h2= plant.properties.name || 'Unnamed Plant'
+          a(href='/plants/form?id=' + plant.id) Edit Plant
+          p
+            strong Description:
+            |  #{plant.properties.description || 'No description'}
+          p
+            strong Bio:
+            |  #{plant.properties.bio || 'Not provided'}
+          p
+            strong Habitat:
+            |  #{plant.properties.habitat || 'Not provided'}
+    else
+      p No plants found.
